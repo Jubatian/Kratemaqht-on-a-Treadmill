@@ -96,7 +96,7 @@ The scolorq version
 
 The scolorq version (crush-scolorq and scolorq-single for single images) uses
 scolorq for quantizing the images. The crush-scolorq script can be used the
-same way like the crush-gimp script, while scolorq-simple is provided to
+same way like the crush-gimp script, while scolorq-single is provided to
 replace the script coming with scolorq itself, automatically querying the
 sizes of the image.
 
@@ -128,6 +128,6 @@ Some notes on other alternatives
 The following other alternatives might exist:
 
 - The pngnq package. The results from this, however, were very unsatisfactory:
-  on every configuration I tried, it removes the shining gem on the forehead
-  of the dragon, and the eyes. Gimp's quantizer is a lot better in this
-  respect.
+  on every configuration I tried (including 256 colors), it removes the
+  shining gem on the forehead of the dragon and the eyes. Gimp's quantizer is
+  a lot better in this regard.
