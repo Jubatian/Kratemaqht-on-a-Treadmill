@@ -35,14 +35,14 @@ Dependencies
 
 The following additional packages are required to run this script:
 
-- Gimp, tested with version 2.8.
 - PNGCrush, tested with version 1.7.9.
+- ImageMagick, tested with version 6.7.7-10.
+- Gimp, tested with version 2.8. (Optional)
 - The images/units/dragons directory (with contents) of the Library of
   Kratemaqht campaign (or whatever image source you need to crush).
 
-If you are interested in the scolorq version, that one does not need Gimp,
-however it uses ImageMagick and (obviously) scolorq. The latter can be
-obtained from here:
+If you are interested in the scolorq version, the source of scolorq can be
+obtained here:
 
 http://www.cs.berkeley.edu/~dcoetzee/downloads/scolorq
 
@@ -52,27 +52,29 @@ which likely prevents its practical use.
 
 
 
-Running the Gimp version (recommended)
+Running the ImageMagick or Gimp versions (recommended)
 ------------------------------------------------------------------------------
 
 
 You need to perform the following steps to get a trimmed down set of your
 images:
 
-- Make sure you have Gimp and PNGCrush installed.
+- Make sure you have ImageMagick, PNGCrush, and optionally Gimp installed.
 
-- Run crush-gimp.sh with the directory containing the images and the desired
-  color count (64 is good for Kratemaqht), wait (a long time) and pray.
+- Run crush-gimp.sh or crush-magick.sh with the directory containing the
+  images and the desired color count (64 is good for Kratemaqht), wait (a long
+  time) and pray.
 
 - Note that the images are overwritten with the trimmed down variants: you may
   want to run the script on a copy of the image directory.
 
-Reducing Kratemaqht in the Wesnoth campaign to 64 colors gives at around 21
+Reducing Kratemaqht in the Wesnoth campaign to 64 colors gives at around 13
 megabytes of images at a decent quality, fine for the purposes of the game.
 
 The exact parameter signature of the script is as follows: ::
 
     ./crush-gimp image_directory color_count
+    ./crush-magick image_directory color_count
 
 The roles of the parameters are as follows:
 
@@ -81,6 +83,9 @@ The roles of the parameters are as follows:
 
 - color_count: The desired count of colors for the RGB portion of the image.
   The alpha channel is not affected, and is not included in this color count.
+
+Gimp and ImageMagick's quantizer seems to offer quite similar performance in
+terms of quality and compressibility.
 
 
 

@@ -16,7 +16,7 @@ for i in ${1}/*.png; do
     ./spatial_color_quant ${i}.rgb ${wd} ${hg} ${2} ${i}.rgb.tmp
     rm ${i}.rgb
     mv ${i}.rgb.tmp ${i}.rgb
-    convert -colors ${2} -depth 8 -size ${wd}x${hg} rgb:${i}.rgb ${i}.t.png
+    convert +dither -colors ${2} -depth 8 -size ${wd}x${hg} rgb:${i}.rgb ${i}.t.png
     rm ${i}.rgb
     convert ${i}.t.png ${i} -compose copy-opacity -composite ${i}.t.png
     pngcrush ${i}.t.png ${i}

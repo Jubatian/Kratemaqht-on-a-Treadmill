@@ -25,6 +25,9 @@ echo "(define pattern \"$1/*.png\")"\
      "        (set! filelist (cdr filelist))))"\
      "(gimp-quit 0)"\
      | gimp -i -b -
+for i in ${1}/*.png; do
+    convert +dither -colors ${2} -depth 8 ${i} ${i}
+done
 mkdir ${1}_crush
 pngcrush -d ${1}_crush ${1}/*.png
 rm -r ${1}
