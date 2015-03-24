@@ -52,10 +52,6 @@ images:
 
 - Make sure you have Gimp and PNGCrush installed.
 
-- Copy batch-alpha-quantize.scm in Gimp's scripts directory, usually found at
-  ~/.gimp-<version>/scripts, where <version> is your particular version of
-  Gimp (for example, "2.8").
-
 - Copy the images/units/dragons directory as dragons next to crush.sh.
 
 - Run crush.sh, wait (a long time) and pray.
@@ -66,4 +62,22 @@ images:
 Currently the script reduces the image to 64 colors, which feels all right,
 and is barely over 20 megs for the entire dragons directory (less than half
 the original size). You can adjust the count of colors by editing crush.sh,
-changing the desired number of colors on the line calling Gimp.
+changing the desired number of colors on the line containing "define colors".
+
+
+
+
+Some notes on other alternatives
+------------------------------------------------------------------------------
+
+
+The following other alternatives might exist:
+
+- The pngnq package. The results from this, however, were very unsatisfactory:
+  on every configuration I tried, it removes the shining gem on the forehead
+  of the dragon, and the eyes. Gimp's quantizer is a lot better in this
+  respect.
+
+- The scolorq program. I found it quite satisfactory, however natively it
+  destroys the alpha channel. It will need further work to produce some
+  solution involving this program in a bulk image converter.
