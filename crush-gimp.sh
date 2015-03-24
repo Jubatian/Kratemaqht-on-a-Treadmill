@@ -1,12 +1,16 @@
 #!/bin/sh
 
-if [ ! -d dragons ]; then
-    echo "Copy the dragons directory here!"
+if [ "$#" -ne 2 ] || [ ! -d "$1" ]; then
+    echo "Needs two parameters:"
+    echo "A directory to process png images within"
+    echo "A color count to quantize every image to (256 or less)"
     exit 1
 fi
+
 echo "Note: the script will take a LOT of time for the entire dragon!"
-echo "(define pattern \"dragons/*.png\")"\
-     "(define colors 64)"\
+
+echo "(define pattern \"$1/*.png\")"\
+     "(define colors $2)"\
      "(let* ((filelist (cadr (file-glob pattern 1))))"\
      "    (while (not (null? filelist))"\
      "        (let* ((filename (car filelist))"\
@@ -21,7 +25,7 @@ echo "(define pattern \"dragons/*.png\")"\
      "        (set! filelist (cdr filelist))))"\
      "(gimp-quit 0)"\
      | gimp -i -b -
-mkdir dragons_crush
-pngcrush -d dragons_crush dragons/*.png
-rm -r dragons
-mv dragons_crush dragons
+mkdir ${1}_crush
+pngcrush -d ${1}_crush ${1}/*.png
+rm -r ${1}
+mv ${1}_crush ${1}
