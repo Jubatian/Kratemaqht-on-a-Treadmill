@@ -18,7 +18,7 @@ for i in ${1}/*.png; do
     mv ${i}.rgb.tmp ${i}.rgb
     convert +dither -colors ${2} -depth 8 -size ${wd}x${hg} rgb:${i}.rgb ${i}.t.png
     rm ${i}.rgb
-    convert ${i}.t.png ${i} -compose copy-opacity -composite ${i}.t.png
+    convert ${i}.t.png ${i} -alpha set -compose copy-opacity -composite ${i}.t.png
     pngcrush ${i}.t.png ${i}
     rm ${i}.t.png
 done

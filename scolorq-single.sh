@@ -14,7 +14,7 @@ rm $1.tmp
 rm $1.rgb
 convert -colors $2 -depth 8 -size ${wd}x${hg} rgb:$3.rgb $3
 rm $3.rgb
-convert $3 $1 -compose copy-opacity -composite $3
+convert $3 $1 -alpha set -compose copy-opacity -composite $3
 pngcrush $3 $3.tmp
 rm $3
 mv $3.tmp $3
