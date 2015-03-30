@@ -33,13 +33,19 @@ Dependencies
 ------------------------------------------------------------------------------
 
 
-The following additional packages are required to run this script:
+The following additional packages are required to run these scripts:
 
 - PNGCrush, tested with version 1.7.9.
 - ImageMagick, tested with version 6.7.7-10.
 - Gimp, tested with version 2.8. (Optional)
+- PNGQuant, tested with version 2.3.5. (Highly recommended!)
 - The images/units/dragons directory (with contents) of the Library of
   Kratemaqht campaign (or whatever image source you need to crush).
+
+For the PNGQuant version, no extra depencies are needed apart from PNGQuant
+itself, which may be obtained from here:
+
+http://pngquant.org
 
 If you are interested in the scolorq version, the source of scolorq can be
 obtained here:
@@ -52,18 +58,19 @@ which likely prevents its practical use.
 
 
 
-Running the ImageMagick or Gimp versions (recommended)
+Running the scripts
 ------------------------------------------------------------------------------
 
 
 You need to perform the following steps to get a trimmed down set of your
 images:
 
-- Make sure you have ImageMagick, PNGCrush, and optionally Gimp installed.
+- Make sure you have ImageMagick, PNGCrush, and optionally Gimp installed. OR
+  if you want to use the PNGQuant version, you only need to get PNGQuant.
 
-- Run crush-gimp.sh or crush-magick.sh with the directory containing the
-  images and the desired color count (64 is good for Kratemaqht), wait (a long
-  time) and pray.
+- Run crush-gimp.sh, crush-magick.sh or crush-pngquant.sh with the directory
+  containing the images and the desired color count (64 is good for
+  Kratemaqht), wait (a long time) and pray.
 
 - Note that the images are overwritten with the trimmed down variants: you may
   want to run the script on a copy of the image directory.
@@ -75,6 +82,7 @@ The exact parameter signature of the script is as follows: ::
 
     ./crush-gimp image_directory color_count
     ./crush-magick image_directory color_count
+    ./crush-pngquant image_directory color_count
 
 The roles of the parameters are as follows:
 
@@ -85,7 +93,29 @@ The roles of the parameters are as follows:
   The alpha channel is not affected, and is not included in this color count.
 
 Gimp and ImageMagick's quantizer seems to offer quite similar performance in
-terms of quality and compressibility.
+terms of quality and compressibility. PNGQuant produces much better results,
+and it is even faster and slightly smaller for the same color counts.
+
+
+
+
+Notes on PNGQuant
+------------------------------------------------------------------------------
+
+
+PNGQuant does the job the best at this task, likely for two reasons.
+
+- Even I could write a quantizer in a day which notably outperforms Gimp's or
+  ImageMagick's quantizer in terms of quality for a given color count. So
+  certainly there is room for improvements on this field! PNGQuant seems to
+  perform very well (I could only come near it in terms of quality with my
+  experiment; and did not see anything performing that good until I found it.
+  Not to mention PNGQuant is blazing fast at doing it's job).
+
+- PNGQuant saves ARGB Indexed images. The other scripts can only produce
+  Indexed + Alpha PNG's (An RGB Indexed image layer plus a seperate alpha
+  layer) which are worse in terms of compressibility. I don't know any other
+  solution which would generate an ARGB Indexed image otherwise.
 
 
 
@@ -129,5 +159,5 @@ The following other alternatives might exist:
 
 - The pngnq package. The results from this, however, were very unsatisfactory:
   on every configuration I tried (including 256 colors), it removes the
-  shining gem on the forehead of the dragon and the eyes. Gimp's quantizer is
-  a lot better in this regard.
+  shining gem on the forehead of the dragon and the eyes. Even Gimp's
+  quantizer is a lot better in this regard.
